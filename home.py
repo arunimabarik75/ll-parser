@@ -9,6 +9,7 @@ from parse_table import createParseTable
 from parse_string import parsingUsingStack
 
 print("---------------------------------------------------------------------")
+st.set_page_config(layout="wide")
 
 # Header
 st.title("LL Parser Visualisation")
@@ -104,3 +105,31 @@ if st.button("Parse String"):
     st.text(return_string)
     if dataframe is not None:
         st.table(dataframe)
+
+webpage_details = """
+<h6> 
+An LL parser, which stands for "Left-to-Right, Leftmost Derivation," is a type of top-down parsing technique used in computer science and compiler design to analyze and parse the structure of a context-free grammar. LL parsers are commonly employed in the process of transforming source code into an abstract syntax tree (AST) or other data structures, making them a crucial component in the development of compilers and interpreters for programming languages.
+</h6>
+"""
+
+developer_details = """
+<h6> Arunima Barik (20BCE016) </h6>
+<h6> Gaurav Golchha (20BCE079) </h6>
+"""
+
+# Add a footer to your Streamlit app
+st.sidebar.markdown(
+    f"""
+    <div style="background-color:#f4f4f4;padding:10px;border-top:1px solid #ccc;text-align:center;">
+        <div style="display:flex;justify-content:space-between;">
+            <div style="text-align:left; width: 49%;">
+                {webpage_details}
+            </div>
+            <div style="text-align:right; width: 49%;">
+                {developer_details}
+            </div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
