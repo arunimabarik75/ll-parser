@@ -1,5 +1,5 @@
 def is_terminal(char):
-    return char.islower()
+    return not char.isupper()
 
 def is_non_terminal(char):
     return char.isupper()

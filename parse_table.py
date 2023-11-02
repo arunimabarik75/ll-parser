@@ -1,11 +1,12 @@
-from first import first 
+from first import first
+
 
 def return_terminals(prods):
     terminals = []
     for prod in prods:
         for rhs in prods.get(prod):
             for rhs_item in rhs:
-                if rhs_item.islower():
+                if not rhs_item.isupper():
                     terminals.append(rhs_item)
     return set(terminals)
 
@@ -17,9 +18,11 @@ def createParseTable(prods, first_set, follow_set):
     terminals = list(return_terminals(prods))
     terminals.sort()
     terminals.append("$")
-    
+
     parse_table = {}
     for terminal in terminals:
+        if terminal == "#":
+            continue
         temp_list = ["" for i in range(len(non_terminals))]
         parse_table[terminal] = temp_list
 

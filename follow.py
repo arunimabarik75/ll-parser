@@ -13,6 +13,8 @@ def follow(start_symbol, non_terminal, prods):
                     subrule = subrule[index_nt + 1:]
                     if len(subrule) != 0:
                         res = first(subrule, prods)
+                        if res is None:
+                            continue
                         if '#' in res:
                             newList = []
                             res.remove('#')

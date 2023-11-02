@@ -39,8 +39,8 @@ first_set = computeAllFirsts(productions)
 follow_set = computeAllFollows(start_symbol, productions)
 
 terminals = list(first_set.keys())
-first_list = [", ".join(first_set[non_terminal]) for non_terminal in first_set]
-follow_list = [", ".join(follow_set[non_terminal]) for non_terminal in follow_set]
+first_list = [" , ".join(first_set[non_terminal]) for non_terminal in first_set]
+follow_list = [" , ".join(follow_set[non_terminal]) for non_terminal in follow_set]
 
 first_follow_df = pd.DataFrame(
     {"First": first_list, "Follow": follow_list}, index=pd.Series(terminals)
