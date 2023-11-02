@@ -107,29 +107,44 @@ if st.button("Parse String"):
         st.table(dataframe)
 
 webpage_details = """
-<h6> 
-An LL parser, which stands for "Left-to-Right, Leftmost Derivation," is a type of top-down parsing technique used in computer science and compiler design to analyze and parse the structure of a context-free grammar. LL parsers are commonly employed in the process of transforming source code into an abstract syntax tree (AST) or other data structures, making them a crucial component in the development of compilers and interpreters for programming languages.
-</h6>
+
+
+<h1 style="text-align: center; text-decoration: underline"> LL Parser </h1>
+
+
+<p style="text-justify: inter-word"> 
+An LL (Left-to-Right, Leftmost derivation) parser is a type of top-down parsing technique used in the field of compiler construction and formal language processing. It is used to analyze and parse the syntax of a programming language or any formal language described by a context-free grammar. 
+
+1. **Predictive Parsing:** LL parsers are predictive parsers, meaning they make parsing decisions based on the next input token (or a lookahead token). The parser predicts the production rule to apply by examining the current input symbol without any backtracking.
+
+2. **Table-Driven Approach:** LL parsing can be implemented using a table-driven approach, which simplifies the parsing process. LL parsing tables (often referred to as LL(1) tables) are precomputed for a given grammar, and these tables help the parser make decisions efficiently.
+
+3. **Advantages:** LL parsers are typically easier to implement and more efficient in practice for LL(1) grammars. They are well-suited for languages with relatively simple syntax. Many programming languages, like Pascal and C, can be parsed efficiently using LL parsers.
+
+4. **Challenges:** LL parsing is limited to LL(1) grammars, which means the parser can't handle ambiguous grammars or languages that require more extensive lookahead. Dealing with left-recursion in the grammar can also be challenging, although there are techniques to eliminate it.
+
+5. **Recursive Descent Parsers:** One common way to implement an LL parser is to use a recursive descent parsing technique. In recursive descent parsing, the parser is built using a set of recursive procedures or functions, each corresponding to a non-terminal symbol in the grammar.
+
+6. **LL(k) and LL(*) Parsers:** While LL(1) parsers are the most common, there are also LL(k) parsers and more advanced variations like LL(*) parsers that can handle more complex grammars by allowing larger lookahead.
+
+ </p>
+
 """
 
 developer_details = """
-<h6> Arunima Barik (20BCE016) </h6>
-<h6> Gaurav Golchha (20BCE079) </h6>
+<hr>
+<h3 style="text-align: center; text-decoration: underline"> Developed By </h3>
+<h4 style="text-align: center"> Arunima Barik (20BCE016) <br> Gaurav Golchha (20BCE079) </h4>
+
 """
 
 # Add a footer to your Streamlit app
 st.sidebar.markdown(
     f"""
-    <div style="background-color:#f4f4f4;padding:10px;border-top:1px solid #ccc;text-align:center;">
-        <div style="display:flex;justify-content:space-between;">
-            <div style="text-align:left; width: 49%;">
                 {webpage_details}
-            </div>
-            <div style="text-align:right; width: 49%;">
+            
                 {developer_details}
-            </div>
-        </div>
-    </div>
+    
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
