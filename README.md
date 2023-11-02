@@ -18,6 +18,7 @@ Streamlit: Webpage
    python3 -m venv venv
    ```
 3. Start the virtual environment
+   
    Windows:
    ```
    venv\Scripts\activate
@@ -26,11 +27,11 @@ Streamlit: Webpage
    ```
    source venv/bin/activate
    ```
-4. Install required libraries
+5. Install required libraries
    ```
    python3 -m pip install -r requirements.txt
    ```
-5. Run the streamlit code
+6. Run the streamlit code
    ```
    streamlit run home.py
    ```
