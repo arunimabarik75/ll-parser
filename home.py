@@ -78,6 +78,10 @@ if st.button("Find First and Follow Sets"):
 st.header("Parsing Table")
 if st.button("Generate Parsing Table"):
     st.table(parsing_table_df)
+    if ll_grammar:
+        st.text("Grammar is LL 1")
+    else:
+        st.text("Grammar is not LL 1")
 
 # -------------------------------------------------------------------------------
 

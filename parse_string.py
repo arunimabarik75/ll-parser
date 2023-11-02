@@ -50,15 +50,18 @@ def parsingUsingStack(prods, parse_table, ll_grammar, input_string, start_symbol
     stack_string = "$" + start_symbol
     i = 0
     n = len(input_string)
+
     while True and i != n:
         curr_string = input_string[0]
-        # input_string = input_string[1:]
         curr_top = stack_string[-1]
         stack_string = stack_string[:-1]
         if curr_top == "'":
             curr_top = stack_string[-1] + curr_top
             stack_string = stack_string[:-1]
-        print("Debug: ", curr_top, curr_string)
+        # print("Debug: ", curr_top, curr_string)
+
+        if curr_top == "#":
+            continue
 
         if curr_string not in terminals:
             return_string = "Wrong Input Character " + str(curr_string)
@@ -66,6 +69,9 @@ def parsingUsingStack(prods, parse_table, ll_grammar, input_string, start_symbol
             return return_string, df
 
         if curr_top == "$" and curr_string == "$":
+            stack.append(curr_top)
+            input.append(curr_string)
+            action.append("Accepted")
             return_string = "String accepted"
             df = pd.DataFrame({"Stack": stack, "Input": input, "Action": action})
             return return_string, df
@@ -75,12 +81,29 @@ def parsingUsingStack(prods, parse_table, ll_grammar, input_string, start_symbol
             df = pd.DataFrame({"Stack": stack, "Input": input, "Action": action})
             return return_string, df
 
-        if curr_top not in non_terminals:
+        if curr_top in non_terminals:
+            non_terminal_index = non_terminals.index(curr_top)
+
+            if parse_table[curr_string][non_terminal_index] == "":
+                return_string = "Invalid input string"
+                df = pd.DataFrame({"Stack": stack, "Input": input, "Action": action})
+                return return_string, df
+            else:
+                production = parse_table[curr_string][non_terminal_index]
+                rhs = production.split(" -> ")[1]
+                rhs = custom_reverse(rhs)
+                stack_string += rhs
+
+            stack.append(stack_string)
+            input.append(input_string)
+            action.append(production)
+
+        else:
             if curr_top == curr_string:
                 input_string = input_string[1:]
                 stack.append(stack_string)
                 input.append(input_string)
-                action.append(production)
+                action.append("Pop " + curr_string)
                 i += 1
                 continue
             else:
@@ -88,23 +111,7 @@ def parsingUsingStack(prods, parse_table, ll_grammar, input_string, start_symbol
                 df = pd.DataFrame({"Stack": stack, "Input": input, "Action": action})
                 return return_string, df
 
-        non_terminal_index = non_terminals.index(curr_top)
-
-        if parse_table[curr_string][non_terminal_index] == "":
-            return_string = "Invalid input string"
-            df = pd.DataFrame({"Stack": stack, "Input": input, "Action": action})
-            return return_string, df
-        else:
-            production = parse_table[curr_string][non_terminal_index]
-            rhs = production.split(" -> ")[1]
-            rhs = custom_reverse(rhs)
-            stack_string += rhs
-
-        stack.append(stack_string)
-        input.append(input_string)
-        action.append(production)
-
-    print("Parse String")
+    print("String parsed")
     print(stack, input, action)
 
     return_string = "String accepted"
